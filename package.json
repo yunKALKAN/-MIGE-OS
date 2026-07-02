@@ -1,7 +1,7 @@
 {
   "name": "@mucizework/root",
   "version": "1.0.0",
-  "description": "MUCIZECHAİN Monorepo Root - Sprint 1",
+  "description": "MIGE OS Monorepo Root - Commercial",
   "private": true,
   "workspaces": [
     "packages/common",
@@ -33,6 +33,6 @@
     "node": ">=20.0.0",
     "npm": ">=9.0.0"
   },
-  "author": "MUCIZEWORK",
-  "license": "MIT"
+  "author": "Mucize Platform",
+  "license": "PROPRIETARY"
 }
