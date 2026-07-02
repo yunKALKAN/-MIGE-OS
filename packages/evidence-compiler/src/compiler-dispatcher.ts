@@ -117,7 +117,11 @@ export class DefaultCompilerDispatcher implements CompilerDispatcher {
     return results;
   }
   
-  getStatus() {
+  getStatus(): {
+    activeCompilations: number;
+    queuedCompilations: number;
+    completedCompilations: number;
+  } {
     return {
       activeCompilations: this.activeCompilations,
       queuedCompilations: this.queuedCompilations,

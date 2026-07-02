@@ -27,7 +27,7 @@ export class DefaultRetryPolicy implements RetryPolicy {
     this.initialDelay = options.initialDelay ?? 1000;
     this.maxDelay = options.maxDelay ?? 30000;
     this.backoffMultiplier = options.backoffMultiplier ?? 2;
-    this.shouldRetry = options.shouldRetry ?? (() => true);
+    this.shouldRetry = options.shouldRetry ?? (() => true); // eslint-disable-line @typescript-eslint/explicit-function-return-type
   }
   
   getDelay(attempt: number): number {
