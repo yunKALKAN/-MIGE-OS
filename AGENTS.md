@@ -112,21 +112,86 @@ A Sprint is **Completed** only if **all** conditions are met:
 
 ---
 
-## Final Sprint Status
+## Release Candidate Status
 
-Only one of these values may be reported:
+Implementation: COMPLETE
+Validation: PENDING
 
-```text
-IN_PROGRESS
+Waiting For:
+- GitHub Build
+- GitHub Lint
+- GitHub Tests
+- GitHub Security Checks
 
+Evidence Source:
+GitHub Actions
+
+Current State:
 VALIDATION_PENDING
 
-VALIDATED
+---
 
-BLOCKED
+## Sprint State Machine
+
+```text
+PLANNED
+    │
+    ▼
+IMPLEMENTING
+    │
+    ▼
+CODE_COMPLETE
+    │
+    ▼
+VALIDATION_PENDING
+    │
+    ├──────────────┐
+    │              │
+    ▼              ▼
+VALIDATED      VALIDATION_FAILED
+    │              │
+    ▼              │
+RELEASED ◄─────────┘
 ```
 
-"COMPLETED" may only be used after **VALIDATED**.
+**State Transitions:**
+- Kod yazmak → `CODE_COMPLETE`
+- GitHub Actions çalışıyor → `VALIDATION_PENDING`
+- Tüm kontroller yeşil → `VALIDATED`
+- Tag + Release → `RELEASED`
+
+---
+
+## Validation State Rule
+
+No task may transition from CODE_COMPLETE to VALIDATED without objective evidence.
+
+The only accepted validation sources are:
+
+- GitHub Actions
+- CI artifacts
+- Test reports
+- Release artifacts
+
+Engineering judgement alone cannot change the validation state.
+
+---
+
+## Sprint 2 Transition Criteria
+
+Sprint 2 may only be started when all of the following are PASS:
+
+* ✅ Build
+* ✅ TypeScript Type Check
+* ✅ Python Lint
+* ✅ Python Tests
+* ✅ Security Scan (CodeQL)
+* ✅ Secret Scanning
+* ✅ Branch Protection
+* ✅ Signed Commit Policy
+* ✅ Signed Release Tag
+
+Only when these criteria are met may Sprint 1 be considered "frozen foundation" and upper layer development begin.
 
 ---
 
