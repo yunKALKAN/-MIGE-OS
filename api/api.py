@@ -13,39 +13,23 @@ from typing import Dict, Optional, List
 import json
 import time
 import logging
-import subprocess
 import uuid
 from datetime import datetime
 from contextlib import asynccontextmanager
-import structlog
 
-# Structured logging configuration
-structlog.configure(
-    processors=[
-        structlog.stdlib.add_log_level,
-        structlog.stdlib.add_logger_name,
-        structlog.processors.TimeStamper(fmt="iso"),
-        structlog.processors.JSONRenderer()
-    ]
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
-
-logger = structlog.get_logger()
+logger = logging.getLogger(__name__)
 
 # API Metadata
 API_VERSION = "1.0.0"
 API_TITLE = "MIGE OS Evidence API"
 SCHEMA_VERSION = "1.0.0"
 BUILD_TIME = datetime.utcnow().isoformat()
-
-# Get git commit
-try:
-    GIT_COMMIT = subprocess.check_output(
-        ["git", "rev-parse", "HEAD"],
-        cwd="/Users/enver/projects/MIGE-OS",
-        stderr=subprocess.DEVNULL
-    ).decode().strip()
-except:
-    GIT_COMMIT = "unknown"
+GIT_COMMIT = "unknown"
 
 # Startup time
 STARTUP_TIME = time.time()
@@ -54,7 +38,7 @@ STARTUP_TIME = time.time()
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Application lifespan manager"""
-    logger.info("API starting up", version=API_VERSION, commit=GIT_COMMIT)
+    logger.info(f"API starting up - version: {API_VERSION}, commit: {GIT_COMMIT}")
     yield
     logger.info("API shutting down")
 
@@ -218,12 +202,7 @@ async def compile_evidence(request: EvidenceRequest, http_request: Request):
     
     start_time = time.time()
     
-    logger.info(
-        "Evidence compilation started",
-        correlation_id=correlation_id,
-        handler_type=request.handler_type,
-        blockchain=request.blockchain
-    )
+    logger.info(f"Evidence compilation started - correlation_id: {correlation_id}, handler_type: {request.handler_type}, blockchain: {request.blockchain}")
     
     try:
         # TODO: Evidence Compiler entegrasyonu
@@ -238,12 +217,7 @@ async def compile_evidence(request: EvidenceRequest, http_request: Request):
             json.dumps(request.raw_data, sort_keys=True).encode()
         ).hexdigest()[:32]
         
-        logger.info(
-            "Evidence compilation completed",
-            correlation_id=correlation_id,
-            evidence_id=evidence_id,
-            compilation_time=compilation_time
-        )
+        logger.info(f"Evidence compilation completed - correlation_id: {correlation_id}, evidence_id: {evidence_id}, compilation_time: {compilation_time}")
         
         return EvidenceResponse(
             success=True,
@@ -252,11 +226,7 @@ async def compile_evidence(request: EvidenceRequest, http_request: Request):
         )
         
     except Exception as e:
-        logger.error(
-            "Evidence compilation failed",
-            correlation_id=correlation_id,
-            error=str(e)
-        )
+        logger.error(f"Evidence compilation failed - correlation_id: {correlation_id}, error: {str(e)}")
         
         return EvidenceResponse(
             success=False,
@@ -270,7 +240,7 @@ async def list_handlers(http_request: Request):
     """Kayıtlı handler'leri listeler"""
     correlation_id = http_request.state.correlation_id
     
-    logger.info("Listing handlers", correlation_id=correlation_id)
+    logger.info(f"Listing handlers - correlation_id: {correlation_id}")
     
     # TODO: Handler Registry entegrasyonu
     return HandlersResponse(
@@ -295,7 +265,7 @@ async def list_blockchains(http_request: Request):
     """Desteklenen blockchain'leri listeler"""
     correlation_id = http_request.state.correlation_id
     
-    logger.info("Listing blockchains", correlation_id=correlation_id)
+    logger.info(f"Listing blockchains - correlation_id: {correlation_id}")
     
     return {
         "blockchains": [
