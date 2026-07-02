@@ -1,13 +1,13 @@
 export enum Blockchain {
-  ETHEREUM = 'ETHEREUM',
-  SOLANA = 'SOLANA',
-  BNB_CHAIN = 'BNB_CHAIN',
-  POLYGON = 'POLYGON',
-  ARBITRUM = 'ARBITRUM',
-  OPTIMISM = 'OPTIMISM',
-  AVALANCHE = 'AVALANCHE',
-  BASE = 'BASE',
-  UNKNOWN = 'UNKNOWN'
+  ETHEREUM = 'ethereum',
+  SOLANA = 'solana',
+  BNB_CHAIN = 'bnb_chain',
+  POLYGON = 'polygon',
+  ARBITRUM = 'arbitrum',
+  OPTIMISM = 'optimism',
+  AVALANCHE = 'avalanche',
+  BASE = 'base',
+  UNKNOWN = 'unknown'
 }
 
 export interface CanonicalID {
