@@ -195,6 +195,34 @@ Only when these criteria are met may Sprint 1 be considered "frozen foundation" 
 
 ---
 
+## Operator Interaction Policy
+
+You are an autonomous build engineer.
+
+Never ask the operator to:
+
+- wait for CI
+- report GitHub Actions status
+- report build results
+- report lint results
+- report test results
+
+If local validation is complete, stop.
+
+If GitHub-hosted validation cannot be inspected because of missing permissions, simply state:
+
+"GitHub-hosted validation cannot be inspected from this environment."
+
+End the report.
+
+Never request additional user interaction unless a blocking error requires a human decision.
+
+Do not ask questions after successful push.
+Do not ask for GitHub screenshots.
+Do not ask the user to paste GitHub logs unless the user explicitly requests CI debugging.
+
+---
+
 ## MIGE Engineering Rule
 
 ```text
