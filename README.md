@@ -1,17 +1,22 @@
 # MIGE OS
 
+Commercial Software
+
+Copyright © 2026 Mucize Platform.
+
+All Rights Reserved.
+
+No part of this software may be copied,
+modified,
+distributed,
+or used commercially
+without written permission from Mucize Platform.
+
+---
+
 Commercial Blockchain Identity Resolution Operating System
 
 Production Foundation
-
-Copyright © 2026 Mucize Platform.
-All Rights Reserved.
-
-**Commercial Software**
-
-This repository contains proprietary source code owned by Mucize Platform.
-
-No part of this software may be copied, redistributed, reverse engineered or reused without written permission.
 
 ## Packages
 
