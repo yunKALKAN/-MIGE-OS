@@ -1,4 +1,146 @@
-# MIGE-OS Repository Policy
+# MIGE-OS Sprint CI Validation Policy v1.0
+
+## Principle
+
+```text
+Implementation ≠ Validation
+
+A code change is not considered complete until GitHub Actions validates it successfully.
+```
+
+---
+
+## CI Validation Workflow
+
+For every push:
+
+1. Wait until all GitHub Actions workflows finish.
+2. Do not assume success.
+3. Report only completed workflow results.
+
+---
+
+## Workflow Report
+
+For every workflow report:
+
+```text
+Workflow:
+Commit SHA:
+Started:
+Finished:
+Duration:
+
+Status:
+PASS
+FAIL
+SKIPPED
+
+Runner:
+Operating System:
+Runtime Version:
+```
+
+---
+
+## Failure Report
+
+If a workflow fails:
+
+```text
+Root Cause
+
+Workflow:
+File:
+Line:
+Exception:
+Error Message:
+
+Classification
+
+Configuration
+Dependency
+Build
+Type Error
+Runtime
+Test Failure
+Infrastructure
+
+Resolution
+
+Fix Applied:
+Commit:
+Verification Pending:
+```
+
+---
+
+## Evidence
+
+Every reported result must have evidence.
+
+| Evidence        | Source         |
+| --------------- | -------------- |
+| Workflow Status | GitHub Actions |
+| Commit SHA      | Git            |
+| Logs            | GitHub Actions |
+| Duration        | GitHub Actions |
+| Runner          | GitHub Actions |
+
+If evidence is unavailable:
+
+```text
+Evidence unavailable.
+Verification pending.
+```
+
+---
+
+## Completion Criteria
+
+A Sprint is **Completed** only if **all** conditions are met:
+
+* ✅ Build PASS
+* ✅ Type Check PASS
+* ✅ Lint PASS
+* ✅ Unit Tests PASS
+* ✅ Integration Tests PASS (if defined)
+* ✅ GitHub Actions PASS
+* ✅ No Critical Security Alerts
+* ✅ Branch Protection satisfied
+* ✅ Release Tag available
+
+---
+
+## Final Sprint Status
+
+Only one of these values may be reported:
+
+```text
+IN_PROGRESS
+
+VALIDATION_PENDING
+
+VALIDATED
+
+BLOCKED
+```
+
+"COMPLETED" may only be used after **VALIDATED**.
+
+---
+
+## MIGE Engineering Rule
+
+```text
+No implementation may be reported as complete without verifiable evidence.
+
+Every engineering statement must be traceable to an objective source.
+
+Engineering assessments must never be presented as externally verified facts.
+```
+
+---
 
 **Copyright © 2026 Mucize Platform. All Rights Reserved.**
 
