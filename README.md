@@ -2,9 +2,13 @@
 
 MUCIZECHAİN Monorepo - Production Foundation
 
+**Copyright © 2026 Mucize Platform. All Rights Reserved.**
+
 ## Overview
 
 MIGE OS, blockchain delillerini toplamak, derlemek ve analiz etmek için production-grade monorepo yapısı.
+
+**Note:** This is proprietary commercial software. Unauthorized copying, modification or redistribution is prohibited.
 
 ## Packages
 
@@ -39,4 +43,10 @@ npm run lint
 
 ## License
 
-MIT
+Copyright (c) 2026 Mucize Platform.
+
+All Rights Reserved.
+
+This repository contains proprietary software.
+
+Unauthorized copying, modification or redistribution is prohibited.
