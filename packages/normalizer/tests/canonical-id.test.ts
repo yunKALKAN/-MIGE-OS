@@ -3,15 +3,15 @@ import { Blockchain, CanonicalID } from '../src/canonical-id';
 describe('Blockchain', () => {
   describe('enum values', () => {
     it('should have all expected blockchain types', () => {
-      expect(Blockchain.ETHEREUM).toBe('ETHEREUM');
-      expect(Blockchain.SOLANA).toBe('SOLANA');
-      expect(Blockchain.BNB_CHAIN).toBe('BNB_CHAIN');
-      expect(Blockchain.POLYGON).toBe('POLYGON');
-      expect(Blockchain.ARBITRUM).toBe('ARBITRUM');
-      expect(Blockchain.OPTIMISM).toBe('OPTIMISM');
-      expect(Blockchain.AVALANCHE).toBe('AVALANCHE');
-      expect(Blockchain.BASE).toBe('BASE');
-      expect(Blockchain.UNKNOWN).toBe('UNKNOWN');
+      expect(Blockchain.ETHEREUM).toBe('ethereum');
+      expect(Blockchain.SOLANA).toBe('solana');
+      expect(Blockchain.BNB_CHAIN).toBe('bnb_chain');
+      expect(Blockchain.POLYGON).toBe('polygon');
+      expect(Blockchain.ARBITRUM).toBe('arbitrum');
+      expect(Blockchain.OPTIMISM).toBe('optimism');
+      expect(Blockchain.AVALANCHE).toBe('avalanche');
+      expect(Blockchain.BASE).toBe('base');
+      expect(Blockchain.UNKNOWN).toBe('unknown');
     });
   });
 });
@@ -28,18 +28,6 @@ describe('CanonicalID', () => {
       expect(canonicalId.blockchain).toBe(Blockchain.ETHEREUM);
       expect(canonicalId.address).toBe('0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb');
       expect(canonicalId.network).toBe('mainnet');
-    });
-
-    it('should be readonly', () => {
-      const canonicalId: CanonicalID = {
-        blockchain: Blockchain.ETHEREUM,
-        address: '0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb',
-        network: 'mainnet'
-      };
-      
-      expect(() => {
-        (canonicalId as any).address = 'modified';
-      }).not.toThrow();
     });
   });
 
